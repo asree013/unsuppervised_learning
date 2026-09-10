@@ -1,2 +1,16 @@
 .env
-/data
+#data
+/data/
+*.csv
+*.xlsx
+*.parquet
+# file build
+__pycache__/
+*.py[cod]
+*$py.class
+
+# os IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
