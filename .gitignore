@@ -8,6 +8,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
+build/
+dist/
+app_macos
+result
+*.spec
 
 # os IDE
 .DS_Store

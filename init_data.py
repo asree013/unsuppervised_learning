@@ -1,26 +1,36 @@
+import os
+import sys
 import requests
 import pandas as pd
-import os
 # pyrefly: ignore [missing-import]
 from dotenv import load_dotenv
-import json
 
+# ค้นหาและโหลด .env จากทั้ง Working Directory และโฟลเดอร์ของไฟล์โปรแกรม
 load_dotenv()
-
-url = os.getenv("BASE_PATH_DATA_GO")
-resource_id = os.getenv("RESOURCE_ID")
-api_key = os.getenv("API_KEY")
-
-params = {
-    'resource_id': resource_id,
-    'limit': 100000
-}
-
-headers = {
-    'api-key': api_key
-}
+if getattr(sys, "frozen", False):
+    load_dotenv(os.path.join(os.path.dirname(sys.executable), ".env"))
+else:
+    load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
 
 def get_data():
+    url = os.getenv("BASE_PATH_DATA_GO")
+    resource_id = os.getenv("RESOURCE_ID")
+    api_key = os.getenv("API_KEY")
+
+    if not url:
+        print("❌ ไม่พบค่า BASE_PATH_DATA_GO ใน .env")
+        print("กรุณาตรวจสอบว่ามีไฟล์ .env วางอยู่ในโฟลเดอร์เดียวกับไฟล์โปรแกรมหรือไม่")
+        return
+
+    params = {
+        'resource_id': resource_id,
+        'limit': 100000
+    }
+
+    headers = {
+        'api-key': api_key
+    }
+
     try:
         result = requests.get(url, params=params, headers=headers)
         result.raise_for_status()

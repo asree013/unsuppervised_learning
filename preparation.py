@@ -1,6 +1,6 @@
 import pandas as pd
 
-def get_preparation_data():
+def get_preparation_data() -> pd.DataFrame:
     df = pd.read_csv("data/covid_data.csv")
     # data preparation
     check_null_df = df.isnull().sum()
@@ -11,7 +11,7 @@ def get_preparation_data():
     # print(df.isna().sum())
     return df
 
-def get_preparation_association_rule():
+def get_preparation_association_rule() -> pd.DataFrame:
     df = pd.read_csv("data/covid_data.csv")
     # data preparation
     check_null_df = df.isnull().sum()
