@@ -18,8 +18,15 @@
 ├── data/
 │   └── covid_data.csv          # ไฟล์ข้อมูลที่ดาวน์โหลดมาจาก API (สร้างอัตโนมัติ)
 ├── results/                    # โฟลเดอร์เก็บกราฟสรุปผล (สร้างอัตโนมัติ)
+│   ├── association_rules_table.png  # ตารางสรุป Strong Association Rules
+│   ├── cluster_distribution_table.png # ตารางสัดส่วนผู้ป่วยในแต่ละ Cluster
+│   ├── cluster_interpret_table.png    # ตารางลักษณะเฉพาะของแต่ละ Cluster
 │   ├── feature_importance.png  # กราฟจัดอันดับความสำคัญของฟีเจอร์
-│   └── pca_scree_plot.png      # กราฟ Scree Plot & Cumulative Explained Variance
+│   ├── pca_scree_plot.png      # กราฟ Scree Plot & Cumulative Explained Variance
+│   ├── pca_2d_projection.png   # กราฟ 2D PCA Projection Scatter Plot (PC1 vs PC2)
+│   ├── pca_summary_table.png   # ตารางสรุปผลการลดมิติข้อมูลด้วย PCA
+│   ├── pca_loadings_table.png  # ตารางแปลความหมายค่าน้ำหนัก PCA Loadings (PC1 & PC2)
+│   └── pca_transformed_data_table.png # ตารางตัวอย่างข้อมูลหลังลดมิติ 5 แถวแรก (PC1-PC6)
 ├── .env.example                # ตัวอย่างการกำหนดค่า Environment Variables
 ├── init_data.py                # สคริปต์ดาวน์โหลดข้อมูลจาก Open Data API
 ├── preparation.py             # ขั้นตอนเตรียมข้อมูล (Data Preparation / Cleaning)
@@ -50,7 +57,7 @@
 
 ### 4. Dimensionality Reduction (`dimensionality_reduction.py`)
 * **Feature Selection:** คำนวณและจัดอันดับความสำคัญของฟีเจอร์ (Feature Importance) ด้วย Random Forest เรียงลำดับจากมากไปน้อย พร้อมบันทึกกราฟแท่ง
-* **Feature Extraction (PCA):** คำนวณ Principal Components, วิเคราะห์ Explained Variance Ratio เพื่อเลือกจำนวน Components ที่เหมาะสม (ครอบคลุม Variance สะสม $\ge 80\%$) พร้อมสร้าง Scree Plot
+* **Feature Extraction (PCA):** คำนวณ Principal Components, วิเคราะห์ Explained Variance Ratio เพื่อเลือกจำนวน Components ที่เหมาะสม (ครอบคลุม Variance สะสม $\ge 80\%$) พร้อมสร้าง Scree Plot, กราฟ 2D Projection (PC1 vs PC2) และตารางสรุป Components
 
 ---
 

@@ -2,7 +2,7 @@ import os
 import sys
 import runpy
 
-# กำหนด Path ให้ระบบหาโมดูลและไฟล์ข้อมูลเจอเสมอ ไม่ว่าจะรันผ่าน python หรือ PyInstaller
+# setup path
 if getattr(sys, "frozen", False):
     base_dir = getattr(sys, "_MEIPASS", os.path.dirname(sys.executable))
     app_dir = os.path.dirname(sys.executable)
@@ -10,7 +10,6 @@ else:
     base_dir = os.path.dirname(os.path.abspath(__file__))
     app_dir = base_dir
 
-# ย้าย Working Directory มาที่โฟลเดอร์ของตัวโปรแกรม (แก้ปัญหาดับเบิลคลิกจาก Finder/Explorer แล้วหา .env หรือ data ไม่เจอ)
 try:
     os.chdir(app_dir)
 except Exception:
@@ -20,16 +19,15 @@ for path in [base_dir, app_dir, os.getcwd()]:
     if path not in sys.path:
         sys.path.insert(0, path)
 
-
 try:
     # pyrefly: ignore [missing-import]
     from dotenv import load_dotenv
     load_dotenv(os.path.join(app_dir, ".env"))
-    load_dotenv() # fallback
+    load_dotenv()
 except Exception:
     pass
 
-# ระบุให้ PyInstaller วิเคราะห์และรวมโมดูลเหล่านี้เข้าสู่ไฟล์ .exe / .app อัตโนมัติ
+# for pyinstaller
 if False:
     import init_data
     import preparation
@@ -46,10 +44,6 @@ def print_banner():
     print("=" * 65)
 
 def run_module(module_name: str):
-    """
-    ฟังก์ชันสำหรับรันโค้ดของแต่ละโมดูลอย่างปลอดภัย
-    ใช้ runpy เพื่อให้รันใหม่ได้ทุกครั้งโดยไม่มีปัญหา Module Caching
-    """
     print(f"\n[กำลังเริ่มประมวลผล {module_name} ...]\n")
     try:
         runpy.run_module(module_name, run_name="__main__")
@@ -57,9 +51,6 @@ def run_module(module_name: str):
         print(f"\nเกิดข้อผิดพลาดในการรัน {module_name}: {e}")
 
 def initialize_dataset():
-    """
-    ทำงาน init_data.py เพื่อตรวจสอบและเตรียมข้อมูล covid_data.csv
-    """
     print("\n--- ขั้นตอน: ตรวจสอบและเตรียมชุดข้อมูล (init_data.py) ---")
     data_path = os.path.join("data", "covid_data.csv")
     

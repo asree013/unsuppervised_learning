@@ -5,7 +5,6 @@ import pandas as pd
 # pyrefly: ignore [missing-import]
 from dotenv import load_dotenv
 
-# ค้นหาและโหลด .env จากทั้ง Working Directory และโฟลเดอร์ของไฟล์โปรแกรม
 load_dotenv()
 if getattr(sys, "frozen", False):
     load_dotenv(os.path.join(os.path.dirname(sys.executable), ".env"))

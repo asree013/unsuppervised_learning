@@ -4,6 +4,7 @@ def get_preparation_data() -> pd.DataFrame:
     df = pd.read_csv("data/covid_data.csv")
     # data preparation
     check_null_df = df.isnull().sum()
+    print(check_null_df)
     text_cols = ['sex', 'nationality', 'province_of_onset', 'district_of_onset']
     df[text_cols] = df[text_cols].fillna("ไม่ระบุ")
     df['age'] = df['age'].fillna(df['age'].median())
